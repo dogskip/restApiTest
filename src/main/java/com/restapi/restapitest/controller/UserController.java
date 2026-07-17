@@ -19,7 +19,6 @@ public class UserController {
     // 모든 유저 조회
     @GetMapping
     public List<UserDto> getAllUsers() {
-        System.out.println(userService.getAllUsers());
         return userService.getAllUsers();
     }
 
