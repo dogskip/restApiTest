@@ -69,8 +69,19 @@ class UserControllerSecurityTests {
 
         mockMvc.perform(post("/api/users")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"email\":\"mallory@example.test\"}"))
+                        .content("{\"firstName\":\"Mallory\",\"lastName\":\"Doe\",\"email\":\"mallory@example.test\"}"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.email").value("mallory@example.test"));
+    }
+
+    @Test
+    @WithMockUser
+    void createUserRejectsInvalidPayload() throws Exception {
+        mockMvc.perform(post("/api/users")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"email\":\"not-an-email\"}"))
+                .andExpect(status().isBadRequest());
+
+        org.mockito.Mockito.verifyNoInteractions(userService);
     }
 }
