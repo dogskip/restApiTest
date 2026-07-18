@@ -40,4 +40,13 @@ Swagger UI는 애플리케이션 실행 후 `/swagger-ui/index.html`에서 확�
 ```bash
 ./gradlew test
 ```
-# restApiTest
+
+## 입력 유효성 검증
+
+`POST /api/users`는 Bean Validation으로 입력을 검증한다.
+
+- `firstName`, `lastName`, `email`은 필수
+- `email`은 올바른 이메일 형식이어야 함
+- 이미 존재하는 이메일은 `IllegalArgumentException`으로 거부
+
+유효하지 않은 페이로드는 `400 Bad Request`를 반환한다.

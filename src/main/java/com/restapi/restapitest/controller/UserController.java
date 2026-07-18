@@ -1,6 +1,7 @@
 package com.restapi.restapitest.controller;
 
 import com.restapi.restapitest.dto.UserDto;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import com.restapi.restapitest.service.UserService;
 
@@ -24,7 +25,7 @@ public class UserController {
 
     // 유저 생성
     @PostMapping
-    public UserDto createUser(@RequestBody UserDto userDto) {
+    public UserDto createUser(@Valid @RequestBody UserDto userDto) {
         return userService.createUser(userDto);
     }
 }
